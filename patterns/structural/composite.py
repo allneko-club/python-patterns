@@ -1,29 +1,27 @@
 """
-*What is this pattern about?
-The composite pattern describes a group of objects that is treated the
-same way as a single instance of the same type of object. The intent of
-a composite is to "compose" objects into tree structures to represent
-part-whole hierarchies. Implementing the composite pattern lets clients
-treat individual objects and compositions uniformly.
+*このデザインパターンについて
+コンポジットパターンは、同じタイプのオブジェクトの単一インスタンスと同じように
+扱われるオブジェクトのグループを表す。コンポジットの目的は、オブジェクトを
+ツリー構造に"構成"して、部分全体の階層を表すことである。コンポジットパターンを実装すると、
+クライアントは個々のオブジェクトと構成を均一に扱うことができる。
 
-*What does this example do?
-The example implements a graphic class，which can be either an ellipse
-or a composition of several graphics. Every graphic can be printed.
+*この例は何をするか？
+この例では、楕円クラスまたは複数のグラフィックの合成をするクラスのいずれかの
+グラフィッククラスを実装している。グラフィックはすべてプリントできる。
 
-*Where is the pattern used practically?
-In graphics editors a shape can be basic or complex. An example of a
-simple shape is a line, where a complex shape is a rectangle which is
-made of four line objects. Since shapes have many operations in common
-such as rendering the shape to screen, and since shapes follow a
-part-whole hierarchy, composite pattern can be used to enable the
-program to deal with all shapes uniformly.
+*このパターンは実際にどこで使われているか？
+グラフィックエディタでは、形状は基本的なものから複雑なものまである。
+例えば、単純な形状は線である。複雑な形状は、4つの線オブジェクトで構成される長方形である。
+図形には、図形を画面にレンダリングするなどの多くの共通の操作があり、
+図形は部分全体の階層に従うため、複合パターンを使用して、プログラムがすべての
+図形を均一に処理できるようなる。
 
-*References:
+*参照:
 https://en.wikipedia.org/wiki/Composite_pattern
 https://infinitescript.com/2014/10/the-23-gang-of-three-design-patterns/
 
-*TL;DR
-Describes a group of objects that is treated as a single instance.
+*要約
+単一のインスタンスとして扱われるオブジェクトのグループを表現する。
 """
 
 from abc import ABC, abstractmethod

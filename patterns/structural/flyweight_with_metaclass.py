@@ -4,13 +4,12 @@ import weakref
 class FlyweightMeta(type):
     def __new__(mcs, name, parents, dct):
         """
-        Set up object pool
+        オブジェクトプールを設定する
 
-        :param name: class name
-        :param parents: class parents
-        :param dct: dict: includes class attributes, class methods,
-        static methods, etc
-        :return: new class
+        :param name: クラス名
+        :param parents: 親クラス
+        :param dct: dict: クラス属性、クラスメソッド、静的メソッドなどが含まれる
+        :return: 新しいクラス
         """
         dct["pool"] = weakref.WeakValueDictionary()
         return super().__new__(mcs, name, parents, dct)
@@ -18,8 +17,8 @@ class FlyweightMeta(type):
     @staticmethod
     def _serialize_params(cls, *args, **kwargs):
         """
-        Serialize input parameters to a key.
-        Simple implementation is just to serialize it as a string
+        入力パラメータをキーにシリアライズする。
+        簡単な実装は、文字列としてシリアライズすること。
         """
         args_list = list(map(str, args))
         args_list.extend([str(kwargs), cls.__name__])

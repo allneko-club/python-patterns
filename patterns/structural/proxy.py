@@ -1,18 +1,17 @@
 """
-*What is this pattern about?
-Proxy is used in places where you want to add functionality to a class without
-changing its interface. The main class is called `Real Subject`. A client should
-use the proxy or the real subject without any code change, so both must have the
-same interface. Logging and controlling access to the real subject are some of
-the proxy pattern usages.
+*このデザインパターンについて
+プロキシは、インターフェイスを変更せずにクラスに機能を追加する場所で使用される。
+メインクラスは`Real Subject`と呼ばれる。クライアントは、コードを変更せずにプロキシまたは
+実際のサブジェクトを使用する必要があるため、両方が同じインターフェイスを持っている必要がある。
+実際のサブジェクトへのアクセスのロギングと制御は、プロキシパターンの使用法の一部である。
 
-*References:
+*参照:
 https://refactoring.guru/design-patterns/proxy/python/example
 https://python-3-patterns-idioms-test.readthedocs.io/en/latest/Fronting.html
 
-*TL;DR
-Add functionality or logic (e.g. logging, caching, authorization) to a resource
-without changing its interface.
+*要約
+インターフェイスを変更せずに、リソースに機能またはロジック（例: ロギング、キャッシング、承認）
+を追加する。
 """
 
 from typing import Union
@@ -20,12 +19,12 @@ from typing import Union
 
 class Subject:
     """
-    As mentioned in the document, interfaces of both RealSubject and Proxy should
-    be the same, because the client should be able to use RealSubject or Proxy with
-    no code change.
+    ドキュメントに記載されているように、クライアントはコードを変更せずにRealSubjectまたはProxyを
+    使用できる様にする必要があるため、RealSubjectとProxyの両方のインターフェイスは同じである
+    必要がある。
 
-    Not all times this interface is necessary. The point is the client should be
-    able to use RealSubject or Proxy interchangeably with no change in code.
+    常にこのインターフェースが必要なわけではない。重要なのは、クライアントがコードを変更せずに
+    RealSubjectまたはProxyを交換しても使用できる必要があること。
     """
 
     def do_the_job(self, user: str) -> None:
@@ -34,8 +33,7 @@ class Subject:
 
 class RealSubject(Subject):
     """
-    This is the main job doer. External services like payment gateways can be a
-    good example.
+    これが主な仕事。支払いゲートウェイなどの外部サービスが良い例
     """
 
     def do_the_job(self, user: str) -> None:
@@ -48,7 +46,7 @@ class Proxy(Subject):
 
     def do_the_job(self, user: str) -> None:
         """
-        logging and controlling access are some examples of proxy usages.
+        ロギングとアクセスの制御はプロキシの使用例
         """
 
         print(f"[log] Doing the job for {user} is requested.")

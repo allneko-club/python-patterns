@@ -1,8 +1,8 @@
 """
-@author: Gordeev Andrey <gordeev.and.and@gmail.com>
+@著者: Gordeev Andrey <gordeev.and.and@gmail.com>
 
-*TL;DR
-Provides recombination business logic by chaining together using boolean logic.
+*要約
+ブール論理を連鎖することにより、再結合されたビジネスロジックを提供する。
 """
 
 from abc import abstractmethod
@@ -93,7 +93,7 @@ def main():
 
     >>> root_specification = UserSpecification().and_specification(SuperUserSpecification())
 
-    # Is specification satisfied by <name>
+    # 仕様は<name>で満たされたか
     >>> root_specification.is_satisfied_by(andrey), 'andrey'
     (False, 'andrey')
     >>> root_specification.is_satisfied_by(ivan), 'ivan'

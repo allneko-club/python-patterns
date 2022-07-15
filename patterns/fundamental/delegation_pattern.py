@@ -1,9 +1,10 @@
 """
-Reference: https://en.wikipedia.org/wiki/Delegation_pattern
-Author: https://github.com/IuryAlves
+参照: https://en.wikipedia.org/wiki/Delegation_pattern
+著者: https://github.com/IuryAlves
 
-*TL;DR
+*要約
 Allows object composition to achieve the same code reuse as inheritance.
+オブジェクトコンポジションが継承と同じコードの再利用を実現できるようにする。
 """
 
 from __future__ import annotations

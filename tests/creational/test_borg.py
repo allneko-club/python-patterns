@@ -7,8 +7,8 @@ class BorgTest(unittest.TestCase):
     def setUp(self):
         self.b1 = Borg()
         self.b2 = Borg()
-        # creating YourBorg instance implicitly sets the state attribute
-        # for all borg instances.
+        # YourBorgインスタンスを作成すると、すべてのborgインスタンスの
+        # state属性が暗黙的に設定される
         self.ib1 = YourBorg()
 
     def tearDown(self):

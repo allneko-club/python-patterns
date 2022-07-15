@@ -1,24 +1,24 @@
 """
-*What is this pattern about?
-This patterns aims to reduce the number of classes required by an
-application. Instead of relying on subclasses it creates objects by
-copying a prototypical instance at run-time.
+*このデザインパターンについて
+このパターンは、アプリケーションに必要なクラスの数を減らすことが目的である。
+サブクラスに依存する代わりに、実行時にプロトタイプのインスタンスをコピーして
+オブジェクトを作成する。
 
-This is useful as it makes it easier to derive new kinds of objects,
-when instances of the class have only a few different combinations of
-state, and when instantiation is expensive.
+これは、クラスのインスタンスがいくつかの異なる状態の組み合わせしかない場合や、
+インスタンス化にコストがかかる場合に、新しい種類のオブジェクトを簡単に
+導出できるため便利である。
 
-*What does this example do?
-When the number of prototypes in an application can vary, it can be
-useful to keep a Dispatcher (aka, Registry or Manager). This allows
-clients to query the Dispatcher for a prototype before cloning a new
-instance.
+*この例は何をするか？
+アプリケーション内のプロトタイプの数が変化する可能性がある場合は、
+ディスパッチャー（別名、レジストリまたはマネージャー）を保持しておくと便利。
+これにより、クライアントは、新しいインスタンスのクローンを作成する前に、
+ディスパッチャにプロトタイプを照会できる。
 
-Below provides an example of such Dispatcher, which contains three
-copies of the prototype: 'default', 'objecta' and 'objectb'.
+以下に、プロトタイプの3つのコピー（'default'や'objecta', 'objectb'）を含む
+ディスパッチャの例を示す。
 
-*TL;DR
-Creates new object instances by cloning prototype.
+*要約
+プロトタイプのクローンを作成して、新しいオブジェクトインスタンスを作成する。
 """
 from __future__ import annotations
 
@@ -31,9 +31,11 @@ class Prototype:
         self.__dict__.update(attrs)
 
     def clone(self, **attrs: Any) -> Prototype:
-        """Clone a prototype and update inner attributes dictionary"""
-        # Python in Practice, Mark Summerfield
-        # copy.deepcopy can be used instead of next line.
+        """
+        プロトタイプのクローンを作成し、内部の属性ディクショナリを更新する
+        """
+        # Python in Practice 著:Mark Summerfield
+        # 次の行の代わりにcopy.deepcopyを使用できる。
         obj = self.__class__(**self.__dict__)
         obj.__dict__.update(attrs)
         return obj
@@ -44,15 +46,15 @@ class PrototypeDispatcher:
         self._objects = {}
 
     def get_objects(self) -> dict[str, Prototype]:
-        """Get all objects"""
+        """全てのオブジェクトを取得する"""
         return self._objects
 
     def register_object(self, name: str, obj: Prototype) -> None:
-        """Register an object"""
+        """オブジェクトを登録する"""
         self._objects[name] = obj
 
     def unregister_object(self, name: str) -> None:
-        """Unregister an object"""
+        """オブジェクトの登録を解除する"""
         del self._objects[name]
 
 

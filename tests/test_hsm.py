@@ -29,22 +29,22 @@ class HsmMethodTest(unittest.TestCase):
             cls.hsm.on_message("trigger")
 
     def test_calling_next_state_shall_change_current_state(cls):
-        cls.hsm._current_state = Standby  # initial state
+        cls.hsm._current_state = Standby  # 状態を初期化
         cls.hsm._next_state("active")
         cls.assertEqual(isinstance(cls.hsm._current_state, Active), True)
-        cls.hsm._current_state = Standby(cls.hsm)  # initial state
+        cls.hsm._current_state = Standby(cls.hsm)  # 状態を初期化
 
     def test_method_perform_switchover_shall_return_specifically(cls):
-        """Exemplary HierachicalStateMachine method test.
-        (here: _perform_switchover()). Add additional test cases..."""
+        """例示的なHierachicalStateMachineメソッドテスト
+        (here: _perform_switchover()). テストケースを追加する..."""
         return_value = cls.hsm._perform_switchover()
         expected_return_value = "perform switchover"
         cls.assertEqual(return_value, expected_return_value)
 
 
 class StandbyStateTest(unittest.TestCase):
-    """Exemplary 2nd level state test class (here: Standby state). Add missing
-    state test classes..."""
+    """例示的な第2レベルの状態テストクラス (here: Standby state).
+    不足している状態のテストクラスを追加..."""
 
     @classmethod
     def setUpClass(cls):

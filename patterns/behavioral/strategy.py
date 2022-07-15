@@ -1,10 +1,10 @@
 """
-*What is this pattern about?
-Define a family of algorithms, encapsulate each one, and make them interchangeable.
-Strategy lets the algorithm vary independently from clients that use it.
+*このデザインパターンについて
+アルゴリズムの仲間を定義し、それぞれをカプセル化して、互換性を持たせる。
+ストラテジーにより、アルゴリズムはそれを使用するクライアントとは独立して変化する。
 
-*TL;DR
-Enables selecting an algorithm at runtime.
+*要約
+実行時にアルゴリズムを選択できるようにする。
 """
 
 
@@ -13,7 +13,7 @@ from __future__ import annotations
 from typing import Callable
 
 
-class DiscountStrategyValidator:  # Descriptor class for check perform
+class DiscountStrategyValidator:  # チェック実行用の記述子クラス
     @staticmethod
     def validate(obj: Order, value: Callable) -> bool:
         try:

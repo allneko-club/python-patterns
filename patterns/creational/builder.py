@@ -1,38 +1,32 @@
 """
-*What is this pattern about?
-It decouples the creation of a complex object and its representation,
-so that the same process can be reused to build objects from the same
-family.
-This is useful when you must separate the specification of an object
-from its actual representation (generally for abstraction).
+*このデザインパターンについて
+同属のオブジェクトを構築するプロセスを再利用できるように、
+複雑なオブジェクトの作成とその表現を切り離す。
+これは、オブジェクトの仕様を実際の表現から分離する必要がある場合に役立つ（一般的に抽象化のため）
 
-*What does this example do?
+*この例は何をするか？
+最初の例では、建物の抽象基本クラスを使用してこのパターンを実現している。
+イニシャライザー（__init__ メソッド）には必要なステップを指定し、具象サブクラスはそれらのステップを実装する。
 
-The first example achieves this by using an abstract base
-class for a building, where the initializer (__init__ method) specifies the
-steps needed, and the concrete subclasses implement these steps.
+他のプログラミング言語では、より複雑な準備が必要になる場合がある。
+実際に、C++のコンストラクターでポリモーフィックな動作をすることはできない。
+参照 https://stackoverflow.com/questions/1453131/how-can-i-get-polymorphic-behavior-in-a-c-constructor
+これは、このPython手法が機能しないことを指している。
+ポリモーフィズムは、外部のすでに構築された別のクラスのインスタンスによって提供される必要がある。
 
-In other programming languages, a more complex arrangement is sometimes
-necessary. In particular, you cannot have polymorphic behaviour in a constructor in C++ -
-see https://stackoverflow.com/questions/1453131/how-can-i-get-polymorphic-behavior-in-a-c-constructor
-- which means this Python technique will not work. The polymorphism
-required has to be provided by an external, already constructed
-instance of a different class.
+一般的に、Pythonではこれは必要ありませんが、2つ目の例はこのような手法も含まれている。
 
-In general, in Python this won't be necessary, but a second example showing
-this kind of arrangement is also included.
+*このパターンは実際にどこで使われているか？
 
-*Where is the pattern used practically?
-
-*References:
+*参照:
 https://sourcemaking.com/design_patterns/builder
 
-*TL;DR
-Decouples the creation of a complex object and its representation.
+*要約
+複雑なオブジェクトの作成とその表現を切り離す。
 """
 
 
-# Abstract Building
+# 抽象ビルディング
 class Building:
     def __init__(self):
         self.build_floor()
@@ -48,7 +42,7 @@ class Building:
         return "Floor: {0.floor} | Size: {0.size}".format(self)
 
 
-# Concrete Buildings
+# 具象ビルディング
 class House(Building):
     def build_floor(self):
         self.floor = "One"
@@ -65,11 +59,9 @@ class Flat(Building):
         self.size = "Small"
 
 
-# In some very complex cases, it might be desirable to pull out the building
-# logic into another function (or a method on another class), rather than being
-# in the base class '__init__'. (This leaves you in the strange situation where
-# a concrete class does not have a useful constructor)
-
+# 非常に複雑な場合、構築ロジックを基本クラスの'__init__'に書くよりも、
+# 別の関数（または、他のクラスのメソッド）として実装する方が望ましい場合がある。
+# （基本クラスの'__init__'に書くと、具象クラスに有用なコンストラクターがないという奇妙な状況になる）
 
 class ComplexBuilding:
     def __repr__(self):
@@ -101,7 +93,7 @@ def main():
     >>> flat
     Floor: More than One | Size: Small
 
-    # Using an external constructor function:
+    # 外部のコンストラクター関数を使用:
     >>> complex_house = construct_building(ComplexHouse)
     >>> complex_house
     Floor: One | Size: Big and fancy

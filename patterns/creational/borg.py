@@ -1,36 +1,31 @@
 """
-*What is this pattern about?
-The Borg pattern (also known as the Monostate pattern) is a way to
-implement singleton behavior, but instead of having only one instance
-of a class, there are multiple instances that share the same state. In
-other words, the focus is on sharing state instead of sharing instance
-identity.
+*このデザインパターンについて
+ボーグパターン（モノステートパターンとも呼ばれます）は、シングルトンの動作を実装する
+方法である。ただし、クラスのインスタンスを1つだけ持つのではなく、同じ状態を共有する
+複数のインスタンスがある。つまり、インスタンスIDを共有するのではなく、
+状態を共有することに重点が置かれる。
 
-*What does this example do?
-To understand the implementation of this pattern in Python, it is
-important to know that, in Python, instance attributes are stored in a
-attribute dictionary called __dict__. Usually, each instance will have
-its own dictionary, but the Borg pattern modifies this so that all
-instances have the same dictionary.
-In this example, the __shared_state attribute will be the dictionary
-shared between all instances, and this is ensured by assigining
-__shared_state to the __dict__ variable when initializing a new
-instance (i.e., in the __init__ method). Other attributes are usually
-added to the instance's attribute dictionary, but, since the attribute
-dictionary itself is shared (which is __shared_state), all other
-attributes will also be shared.
+*この例は何をするか？
+Pythonでのこのパターンの実装を理解するには、インスタンスの属性が__dict__と呼ばれる
+属性ディクショナリに格納されていることを知っておくことが重要。通常、各インスタンスには
+独自の辞書があるが、ボーグパターンはすべてのインスタンスが同じ辞書を持つように変更する。
+この例では、__shared_state属性がすべてのインスタンス間で共有されるディクショナリである。
+これは、新しいインスタンスを__init__メソッドで初期化するときに__shared_stateを
+__dict__変数に割り当てることによって保証される。他の属性は通常、インスタンスの
+属性ディクショナリに追加されるが、属性ディクショナリ（__shared_state）自体が
+共有されるため、他の属性もすべて共有される。
 
-*Where is the pattern used practically?
-Sharing state is useful in applications like managing database connections:
+*このパターンは実際にどこで使われているか？
+状態の共有はデータベース接続の管理などのアプリケーションで役立つ:
 https://github.com/onetwopunch/pythonDbTemplate/blob/master/database.py
 
-*References:
+*参照:
 - https://fkromer.github.io/python-pattern-references/design/#singleton
 - https://learning.oreilly.com/library/view/python-cookbook/0596001673/ch05s23.html
 - http://www.aleax.it/5ep.html
 
-*TL;DR
-Provides singleton-like behavior sharing state between instances.
+*要約
+インスタンス間で状態を共有するシングルトンのような動作を提供する。
 """
 from typing import Dict
 
@@ -48,7 +43,7 @@ class YourBorg(Borg):
         if state:
             self.state = state
         else:
-            # initiate the first instance with default state
+            # デフォルトの状態で最初のインスタンスを初期化
             if not hasattr(self, "state"):
                 self.state = "Init"
 
@@ -69,8 +64,8 @@ def main():
     >>> print('rm2: {0}'.format(rm2))
     rm2: Running
 
-    # When the `state` attribute is modified from instance `rm2`,
-    # the value of `state` in instance `rm1` also changes
+    # `state`属性が`rm2`インスタンスから変更されると、
+    # `rm1`インスタンスの`state`の値も変更される
     >>> rm2.state = 'Zombie'
 
     >>> print('rm1: {0}'.format(rm1))
@@ -78,11 +73,11 @@ def main():
     >>> print('rm2: {0}'.format(rm2))
     rm2: Zombie
 
-    # Even though `rm1` and `rm2` share attributes, the instances are not the same
+    # `rm1`と`rm2`は属性を共有しているが、インスタンスは同じではない
     >>> rm1 is rm2
     False
 
-    # New instances also get the same shared state
+    # 新しいインスタンスも同じ共有状態を取得する
     >>> rm3 = YourBorg()
 
     >>> print('rm1: {0}'.format(rm1))
@@ -92,13 +87,13 @@ def main():
     >>> print('rm3: {0}'.format(rm3))
     rm3: Zombie
 
-    # A new instance can explicitly change the state during creation
+    # 新しいインスタンスは、作成中に状態を明示的に変更できる
     >>> rm4 = YourBorg('Running')
 
     >>> print('rm4: {0}'.format(rm4))
     rm4: Running
 
-    # Existing instances reflect that change as well
+    # 既存のインスタンスはその変更も反映する
     >>> print('rm3: {0}'.format(rm3))
     rm3: Running
     """

@@ -1,9 +1,9 @@
 """
-Lazily-evaluated property pattern in Python.
+パイソンによる遅延評価プロパティーパターン
 
 https://en.wikipedia.org/wiki/Lazy_evaluation
 
-*References:
+*参照:
 bottle
 https://github.com/bottlepy/bottle/blob/cafc15419cbb4a6cb748e6ecdccf92893bb25ce5/bottle.py#L270
 django
@@ -15,8 +15,8 @@ https://github.com/Pylons/pyramid/blob/7909e9503cdfc6f6e84d2c7ace1d3c03ca1d8b73/
 werkzeug
 https://github.com/pallets/werkzeug/blob/5a2bf35441006d832ab1ed5a31963cbc366c99ac/werkzeug/utils.py#L35
 
-*TL;DR
-Delays the eval of an expr until its value is needed and avoids repeated evals.
+*要約
+式の評価をその値が必要になるまで遅らせ、繰り返される評価を回避する。
 """
 
 import functools
@@ -37,10 +37,9 @@ class lazy_property:
 
 def lazy_property2(fn):
     """
-    A lazy property decorator.
+    遅延プロパティーデコレーター
 
-    The function decorated is called the first time to retrieve the result and
-    then that calculated result is used the next time you access the value.
+    デコレーター関数は、最初は結果を取得するために呼び出され、以降はその計算結果が使用される。
     """
     attr = "_lazy__" + fn.__name__
 
@@ -61,7 +60,7 @@ class Person:
 
     @lazy_property
     def relatives(self):
-        # Get all relatives, let's assume that it costs much time.
+        # 関連する値をすべて取得する。この処理は非常に時間がかかると仮定する。
         relatives = "Many relatives."
         return relatives
 
@@ -80,14 +79,14 @@ def main():
     >>> Jhon.occupation
     'Coder'
 
-    # Before we access `relatives`
+    # `relatives`にアクセスする前
     >>> sorted(Jhon.__dict__.items())
     [('call_count2', 0), ('name', 'Jhon'), ('occupation', 'Coder')]
 
     >>> Jhon.relatives
     'Many relatives.'
 
-    # After we've accessed `relatives`
+    # `relatives`にアクセスした後
     >>> sorted(Jhon.__dict__.items())
     [('call_count2', 0), ..., ('relatives', 'Many relatives.')]
 

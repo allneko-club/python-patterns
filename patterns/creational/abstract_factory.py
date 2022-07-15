@@ -1,33 +1,28 @@
 """
-*What is this pattern about?
+*このデザインパターンについて
+Javaや他の言語ではAbstract Factoryパターンは特定の具象クラスを必要としない、
+関連/依存オブジェクトを作成するインターフェースを提供するのに役立つ。
 
-In Java and other languages, the Abstract Factory Pattern serves to provide an interface for
-creating related/dependent objects without need to specify their
-actual class.
+この考え方はビジネスロジックや、プラットフォームの選択などに応じてオブジェクトの作成を抽象化する事。
 
-The idea is to abstract the creation of objects depending on business
-logic, platform choice, etc.
+パイソンでは、インターフェースはパイソンに"内蔵"されている単純なコーラブルを使う。
+通常は、クラスをコーラブルとして利用できる。なぜならパイソンのクラスは第１級オブジェクトだからである。
 
-In Python, the interface we use is simply a callable, which is "builtin" interface
-in Python, and in normal circumstances we can simply use the class itself as
-that callable, because classes are first class objects in Python.
+*この例は何をするか？
+ペットの作成を抽象化し、利用者が選んだファクトリー（DogやCatやrandom_animal）に応じてペットを生成する。
+これは、Dog/Catとrandom_animalの両方が共通のインターフェース（生成や .speak()のコーラブルに対して）
+に配慮しているため機能する。
+これで、このアプリケーションはペットを抽象的に作成し、後で、利用者の基準に基づいて、猫か犬かを決定できる。
 
-*What does this example do?
-This particular implementation abstracts the creation of a pet and
-does so depending on the factory we chose (Dog or Cat, or random_animal)
-This works because both Dog/Cat and random_animal respect a common
-interface (callable for creation and .speak()).
-Now my application can create pets abstractly and decide later,
-based on my own criteria, dogs over cats.
 
-*Where is the pattern used practically?
+*このパターンは実際にどこで使われているか？
 
-*References:
+*参照:
 https://sourcemaking.com/design_patterns/abstract_factory
 http://ginstrom.com/scribbles/2007/10/08/design-patterns-python-style/
 
-*TL;DR
-Provides a way to encapsulate a group of individual factories.
+*要約
+個々のファクトリーのグループをカプセル化する方法を提供する。
 """
 
 import random
@@ -63,30 +58,34 @@ class Cat(Pet):
 
 class PetShop:
 
-    """A pet shop"""
+    """ペットショップ"""
 
     def __init__(self, animal_factory: Type[Pet]) -> None:
-        """pet_factory is our abstract factory.  We can set it at will."""
+        """
+        pet_factoryは抽象的なファクトリーで、自由に設定できる
+        """
 
         self.pet_factory = animal_factory
 
     def buy_pet(self, name: str) -> Pet:
-        """Creates and shows a pet using the abstract factory"""
+        """
+        抽象的なファクトリーを使ってペットを生成し、表示
+        """
 
         pet = self.pet_factory(name)
         print(f"Here is your lovely {pet}")
         return pet
 
 
-# Additional factories:
+# 追加のファクトリー：
 
-# Create a random animal
+# 動物をランダムに生成
 def random_animal(name: str) -> Pet:
-    """Let's be dynamic!"""
+    """動的に選ぶ"""
     return random.choice([Dog, Cat])(name)
 
 
-# Show pets with various factories
+# さまざまなファクトリーでペットを表示
 def main() -> None:
     """
     # A Shop that sells only cats
@@ -115,7 +114,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    random.seed(1234)  # for deterministic doctest outputs
+    random.seed(1234)  # doctestの出力に再現性を持たせるためにシード値を設定する
     import doctest
 
     doctest.testmod()

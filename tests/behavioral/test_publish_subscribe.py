@@ -6,7 +6,7 @@ from patterns.behavioral.publish_subscribe import Provider, Publisher, Subscribe
 
 class TestProvider(unittest.TestCase):
     """
-    Integration tests ~ provider class with as little mocking as possible.
+    統合テスト ~ モックをできるだけ少なくしたプロバイダークラス
     """
 
     def test_subscriber_shall_be_attachable_to_subscriptions(cls):

@@ -1,78 +1,78 @@
-python-patterns
+python パターン集
 ===============
 
-A collection of design patterns and idioms in Python.
+パイソンで書かれたデザインパターンやイディオムのコレクション
 
-Current Patterns
+主流のパターン
 ----------------
 
-__Creational Patterns__:
+__生成に関するパターン__:
 
-| Pattern | Description |
-|:-------:| ----------- |
-| [abstract_factory](patterns/creational/abstract_factory.py) | use a generic function with specific factories |
-| [borg](patterns/creational/borg.py) | a singleton with shared-state among instances |
-| [builder](patterns/creational/builder.py) | instead of using multiple constructors, builder object receives parameters and returns constructed objects |
-| [factory](patterns/creational/factory.py) | delegate a specialized function/method to create instances |
-| [lazy_evaluation](patterns/creational/lazy_evaluation.py) | lazily-evaluated property pattern in Python |
-| [pool](patterns/creational/pool.py) | preinstantiate and maintain a group of instances of the same type |
-| [prototype](patterns/creational/prototype.py) | use a factory and clones of a prototype for new instances (if instantiation is expensive) |
+| パターン | 説明                                                         |
+|:-------:|------------------------------------------------------------|
+| [abstract_factory](patterns/creational/abstract_factory.py) | 特定のファクトリでジェネリック関数を使用する                                     |
+| [borg](patterns/creational/borg.py) | インスタンス間で状態を共有するシングルトン                                      |
+| [builder](patterns/creational/builder.py) | 複数のコンストラクターを使用する代わりに、ビルダーオブジェクトはパラメーターを受け取り、構築されたオブジェクトを返す |
+| [factory](patterns/creational/factory.py) | インスタンスを作成するための特殊な関数/メソッドを委任する                              |
+| [lazy_evaluation](patterns/creational/lazy_evaluation.py) | Pythonで遅延評価されたプロパティパターン                                    |
+| [pool](patterns/creational/pool.py) | 同じタイプのインスタンスのグループを事前にインスタンス化して維持する                         |
+| [prototype](patterns/creational/prototype.py) | 新しいインスタンスのファクトリとプロトタイプのクローンを使用する（インスタンス化に時間がかかる場合）         |
 
-__Structural Patterns__:
+__構造に関するパターン__:
 
-| Pattern | Description |
-|:-------:| ----------- |
-| [3-tier](patterns/structural/3-tier.py) | data<->business logic<->presentation separation (strict relationships) |
-| [adapter](patterns/structural/adapter.py) | adapt one interface to another using a white-list |
-| [bridge](patterns/structural/bridge.py) | a client-provider middleman to soften interface changes |
-| [composite](patterns/structural/composite.py) | lets clients treat individual objects and compositions uniformly |
-| [decorator](patterns/structural/decorator.py) | wrap functionality with other functionality in order to affect outputs |
-| [facade](patterns/structural/facade.py) | use one class as an API to a number of others |
-| [flyweight](patterns/structural/flyweight.py) | transparently reuse existing instances of objects with similar/identical state |
-| [front_controller](patterns/structural/front_controller.py) | single handler requests coming to the application |
-| [mvc](patterns/structural/mvc.py) | model<->view<->controller (non-strict relationships) |
-| [proxy](patterns/structural/proxy.py) | an object funnels operations to something else |
+| パターン                                                        | 説明                                       |
+|:------------------------------------------------------------|------------------------------------------|
+| [3-tier](patterns/structural/3-tier.py)                     | データ<->ビジネスロジック<->プレゼンテーションの分離（厳密な関係）     |
+| [adapter](patterns/structural/adapter.py)                   | ホワイトリストを使用して、あるインターフェイスを別のインターフェイスに適合させる |
+| [bridge](patterns/structural/bridge.py)                     | インターフェイスの変更を和らげるためのクライアントとプロバイダーの仲介者     |
+| [composite](patterns/structural/composite.py)               | クライアントが個々のオブジェクトと構成を均一に処理できるようにする        |
+| [decorator](patterns/structural/decorator.py)               | 出力に影響を与えるために、機能を他の機能でラップする               |
+| [facade](patterns/structural/facade.py)                     | 1つのクラスを他の多くのクラスへのAPIとして使用する              |
+| [flyweight](patterns/structural/flyweight.py)               | 類似/同一の状態のオブジェクトを透過的に再利用する                |
+| [front_controller](patterns/structural/front_controller.py) | 単一のリクエストハンドラー                            |
+| [mvc](patterns/structural/mvc.py)                           | model <-> view <-> controller（非厳密な関係）    |
+| [proxy](patterns/structural/proxy.py)                       | あるオブジェクトが他の何かに操作を集中させる                   |
 
-__Behavioral Patterns__:
+__振る舞いに関するパターン__:
 
-| Pattern | Description |
-|:-------:| ----------- |
-| [chain_of_responsibility](patterns/behavioral/chain_of_responsibility.py) | apply a chain of successive handlers to try and process the data |
-| [catalog](patterns/behavioral/catalog.py) | general methods will call different specialized methods based on construction parameter |
-| [chaining_method](patterns/behavioral/chaining_method.py) | continue callback next object method |
-| [command](patterns/behavioral/command.py) | bundle a command and arguments to call later |
-| [iterator](patterns/behavioral/iterator.py) | traverse a container and access the container's elements |
-| [iterator](patterns/behavioral/iterator_alt.py) (alt. impl.)| traverse a container and access the container's elements |
-| [mediator](patterns/behavioral/mediator.py) | an object that knows how to connect other objects and act as a proxy |
-| [memento](patterns/behavioral/memento.py) | generate an opaque token that can be used to go back to a previous state |
-| [observer](patterns/behavioral/observer.py) | provide a callback for notification of events/changes to data |
-| [publish_subscribe](patterns/behavioral/publish_subscribe.py) | a source syndicates events/data to 0+ registered listeners |
-| [registry](patterns/behavioral/registry.py) | keep track of all subclasses of a given class |
-| [specification](patterns/behavioral/specification.py) |  business rules can be recombined by chaining the business rules together using boolean logic |
-| [state](patterns/behavioral/state.py) | logic is organized into a discrete number of potential states and the next state that can be transitioned to |
-| [strategy](patterns/behavioral/strategy.py) | selectable operations over the same data |
-| [template](patterns/behavioral/template.py) | an object imposes a structure but takes pluggable components |
-| [visitor](patterns/behavioral/visitor.py) | invoke a callback for all items of a collection |
+| パターン | 説明                                            |
+|:-------:|-----------------------------------------------|
+| [chain_of_responsibility](patterns/behavioral/chain_of_responsibility.py) | 連続するハンドラーのチェーンを適用して、データを処理する                  |
+| [catalog](patterns/behavioral/catalog.py) | 一般的なメソッドは、構築パラメータに基づいてさまざまな特殊なメソッドを呼び出す       |
+| [chaining_method](patterns/behavioral/chaining_method.py) | コールバックの次のオブジェクトメソッドを続行する                      |
+| [command](patterns/behavioral/command.py) | 後で呼び出すコマンドと引数をバンドルする                          |
+| [iterator](patterns/behavioral/iterator.py) | コンテナを横断し、コンテナの要素にアクセスする                       |
+| [iterator](patterns/behavioral/iterator_alt.py) (alt. impl.)| コンテナを横断し、コンテナの要素にアクセスする                       |
+| [mediator](patterns/behavioral/mediator.py) | 他のオブジェクトを接続してプロキシとして機能する方法を知っているオブジェクト        |
+| [memento](patterns/behavioral/memento.py) | 以前の状態に戻るために使う曖昧なトークンを生成する                     |
+| [observer](patterns/behavioral/observer.py) | データにイベント/変更の通知をするためのコールバックを提供する               |
+| [publish_subscribe](patterns/behavioral/publish_subscribe.py) | ソースはイベント/データを0件以上の登録済みリスナーに配給する               |
+| [registry](patterns/behavioral/registry.py) | 特定のクラスのすべてのサブクラスを追跡する                         |
+| [specification](patterns/behavioral/specification.py) | ブール論理を使用してビジネスルールをチェーン化することにより、ビジネスルールを再結合できる |
+| [state](patterns/behavioral/state.py) | 離散的な潜在的状態と、遷移可能な次の状態に構造化される                   |
+| [strategy](patterns/behavioral/strategy.py) | 同じデータに対する選択可能な操作                              |
+| [template](patterns/behavioral/template.py) | オブジェクトは構築化を負いますが、接続可能なコンポーネントを受け取る            |
+| [visitor](patterns/behavioral/visitor.py) | コレクションのすべてのアイテムに対してコールバックを呼び出す                |
 
-__Design for Testability Patterns__:
+__テストしやすいパターン__:
 
-| Pattern | Description |
-|:-------:| ----------- |
-| [dependency_injection](patterns/dependency_injection.py) | 3 variants of dependency injection |
+| パターン | 説明                                            |
+|:-------:|-----------------------------------------------|
+| [dependency_injection](patterns/dependency_injection.py) | 依存性注入 ３パターン |
 
-__Fundamental Patterns__:
+__基本的なパターン__:
 
-| Pattern | Description |
-|:-------:| ----------- |
-| [delegation_pattern](patterns/fundamental/delegation_pattern.py) | an object handles a request by delegating to a second object (the delegate) |
+| パターン | 説明                                              |
+|:-------:|-------------------------------------------------|
+| [delegation_pattern](patterns/fundamental/delegation_pattern.py) | オブジェクトは、2番目のオブジェクト（デリゲート）に委任することによってリクエストを処理する |
 
-__Others__:
+__その他__:
 
-| Pattern | Description |
-|:-------:| ----------- |
-| [blackboard](patterns/other/blackboard.py) | architectural model, assemble different sub-system knowledge to build a solution, AI approach - non gang of four pattern |
-| [graph_search](patterns/other/graph_search.py) | graphing algorithms - non gang of four pattern |
-| [hsm](patterns/other/hsm/hsm.py) | hierarchical state machine - non gang of four pattern |
+| パターン | 説明                                     |
+|:-------:|----------------------------------------|
+| [blackboard](patterns/other/blackboard.py) | アーキテクチャモデル、ソリューションを構築するためのさまざまなサブシステム知識の組み立て、AIアプローチ - Gang Of Fourのデザインパターンではない |
+| [graph_search](patterns/other/graph_search.py) | グラフ化アルゴリズム - Gang Of Fourのデザインパターンではない |
+| [hsm](patterns/other/hsm/hsm.py) | 階層型ステートマシン - Gang Of Fourのデザインパターンではない |
 
 
 Videos

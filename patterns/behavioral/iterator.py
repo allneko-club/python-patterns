@@ -1,19 +1,19 @@
 """
 http://ginstrom.com/scribbles/2007/10/08/design-patterns-python-style/
-Implementation of the iterator pattern with a generator
+ジェネレータを使用したイテレータパターンの実装
 
-*TL;DR
-Traverses a container and accesses the container's elements.
+*要約
+コンテナを横断し、コンテナの要素にアクセスする。
 """
 
 
 def count_to(count):
-    """Counts by word numbers, up to a maximum of five"""
+    """最大5つまで、単語番号でカウント"""
     numbers = ["one", "two", "three", "four", "five"]
     yield from numbers[:count]
 
 
-# Test the generator
+# ジェネレータをテストする
 def count_to_two() -> None:
     return count_to(2)
 
@@ -24,13 +24,13 @@ def count_to_five() -> None:
 
 def main():
     """
-    # Counting to two...
+    # 2つ数える...
     >>> for number in count_to_two():
     ...     print(number)
     one
     two
 
-    # Counting to five...
+    # 5つ数える...
     >>> for number in count_to_five():
     ...     print(number)
     one

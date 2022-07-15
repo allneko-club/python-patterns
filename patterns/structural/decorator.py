@@ -1,32 +1,29 @@
 """
-*What is this pattern about?
-The Decorator pattern is used to dynamically add a new feature to an
-object without changing its implementation. It differs from
-inheritance because the new feature is added only to that particular
-object, not to the entire subclass.
+*このデザインパターンについて
+デコレータパターンは、実装を変更せずにオブジェクトに新しい機能を動的に追加するために使用される。
+新しい機能はサブクラス全体ではなく、特定のオブジェクトにのみ追加されるため、継承とは異なる。
 
-*What does this example do?
-This example shows a way to add formatting options (boldface and
-italic) to a text by appending the corresponding tags (<b> and
-<i>). Also, we can see that decorators can be applied one after the other,
-since the original text is passed to the bold wrapper, which in turn
-is passed to the italic wrapper.
+*この例は何をするか？
+この例は、対応するタグ（<b>や<i>）を追加することにより、テキストに
+書式設定オプション（太字や斜体）を追加する方法を示している。
+また、元のテキストが太字のラッパーに渡され、次に斜体のラッパーに渡されるため、
+デコレータを次々に適用できることがわかる。
 
-*Where is the pattern used practically?
-The Grok framework uses decorators to add functionalities to methods,
-like permissions or subscription to an event:
+*このパターンは実際にどこで使われているか？
+Grokフレームワークは、デコレータを使用して、権限やイベントへのサブスクリプションなどの
+機能をメソッドに追加する:
 http://grok.zope.org/doc/current/reference/decorators.html
 
-*References:
+*参照:
 https://sourcemaking.com/design_patterns/decorator
 
-*TL;DR
-Adds behaviour to object without affecting its class.
+*要約
+クラスに影響を与えることなくオブジェクトに動作を追加する。
 """
 
 
 class TextTag:
-    """Represents a base text tag"""
+    """テキストタグの基本を表す"""
 
     def __init__(self, text):
         self._text = text
@@ -36,7 +33,7 @@ class TextTag:
 
 
 class BoldWrapper(TextTag):
-    """Wraps a tag in <b>"""
+    """<b>タグでラップする"""
 
     def __init__(self, wrapped):
         self._wrapped = wrapped
@@ -46,7 +43,7 @@ class BoldWrapper(TextTag):
 
 
 class ItalicWrapper(TextTag):
-    """Wraps a tag in <i>"""
+    """<i>タグでラップする"""
 
     def __init__(self, wrapped):
         self._wrapped = wrapped
