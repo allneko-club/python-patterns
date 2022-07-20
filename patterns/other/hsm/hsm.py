@@ -1,11 +1,10 @@
 """
-Implementation of the HSM (hierarchical state machine) or
-NFSM (nested finite state machine) C++ example from
+HSM（階層型ステートマシン）またはNFSM（ネストされた有限ステートマシン）の実装 C++の例
 http://www.eventhelix.com/RealtimeMantra/HierarchicalStateMachine.htm#.VwqLVEL950w
-in Python
 
-- single source 'message type' for state transition changes
-- message type considered, messages (comment) not considered to avoid complexity
+パイソンでは
+- 状態遷移変更のための単一ソース'message type'
+- 考慮されるメッセージタイプ、複雑さを回避するために考慮されないメッセージ（コメント）
 """
 
 
@@ -78,7 +77,7 @@ class HierachicalStateMachine:
     def _check_mate_status(self):
         return "check mate status"
 
-    def on_message(self, message_type):  # message ignored
+    def on_message(self, message_type):  # メッセージは無視される
         if message_type in self.message_types.keys():
             self.message_types[message_type]()
         else:
@@ -129,7 +128,7 @@ class Active(Inservice):
         super().on_fault_trigger()
 
     def on_switchover(self):
-        self._hsm.on_switchover()  # message ignored
+        self._hsm.on_switchover()  # メッセージは無視される
         self._hsm.next_state("standby")
 
 
@@ -138,7 +137,7 @@ class Standby(Inservice):
         self._hsm = HierachicalStateMachine
 
     def on_switchover(self):
-        super().on_switchover()  # message ignored
+        super().on_switchover()  # メッセージは無視される
         self._hsm._next_state("active")
 
 
@@ -147,7 +146,7 @@ class OutOfService(Unit):
         self._hsm = HierachicalStateMachine
 
     def on_operator_inservice(self):
-        self._hsm.on_switchover()  # message ignored
+        self._hsm.on_switchover()  # メッセージは無視される
         self._hsm.send_operator_inservice_response()
         self._hsm.next_state("suspect")
 
@@ -167,11 +166,11 @@ class Suspect(OutOfService):
 
     def on_operator_inservice(self):
         super().abort_diagnostics()
-        super().on_operator_inservice()  # message ignored
+        super().on_operator_inservice()  # メッセージは無視される
 
 
 class Failed(OutOfService):
-    """No need to override any method."""
+    """メソッドをオーバーライドする必要はない"""
 
     def __init__(self, HierachicalStateMachine):
         self._hsm = HierachicalStateMachine

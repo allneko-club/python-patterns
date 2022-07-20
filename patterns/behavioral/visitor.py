@@ -1,18 +1,18 @@
 """
 http://peter-hoffmann.com/2010/extrinsic-visitor-pattern-python-inheritance.html
 
-*TL;DR
-Separates an algorithm from an object structure on which it operates.
+*要約
+アルゴリズムが動作するオブジェクト構造からそのアルゴリズムを分離する。
 
-An interesting recipe could be found in
-Brian Jones, David Beazley "Python Cookbook" (2013):
+"Python Cookbook" (2013) 著:Brian Jones, David Beazley
+で面白いレシピが見つかりました:
 - "8.21. Implementing the Visitor Pattern"
 - "8.22. Implementing the Visitor Pattern Without Recursion"
 
-*Examples in Python ecosystem:
+*Pythonのエコシステムの例:
 - Python's ast.NodeVisitor: https://github.com/python/cpython/blob/master/Lib/ast.py#L250
-which is then being used e.g. in tools like `pyflakes`.
-- `Black` formatter tool implements it's own: https://github.com/ambv/black/blob/master/black.py#L718
+その後、`pyflakes`のようなツールで使用される。
+- `Black`というフォーマッターツールはこのパターンを実装している: https://github.com/ambv/black/blob/master/black.py#L718
 """
 
 

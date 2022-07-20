@@ -1,22 +1,20 @@
 """
-Command pattern decouples the object invoking a job from the one who knows
-how to do it. As mentioned in the GoF book, a good example is in menu items.
-You have a menu that has lots of items. Each item is responsible for doing a
-special thing and you want your menu item just call the execute method when
-it is pressed. To achieve this you implement a command object with the execute
-method for each menu item and pass to it.
+コマンドパターンは、ジョブを呼び出すオブジェクトを、その方法を知っているオブジェクトから切り離す。
+GoFの本で述べられているように、良い例はメニュー項目です。メニューに多くのアイテムがある。
+各項目は特別なことを行う責任があり、メニュー項目が押されたときに実行メソッドを呼ぶだけで済む。
+これを実現するには、各メニュー項目のexecuteメソッドを使用してコマンドオブジェクトを実装し、渡す。
 
-*About the example
-We have a menu containing two items. Each item accepts a file name, one hides the file
-and the other deletes it. Both items have an undo option.
-Each item is a MenuItem class that accepts the corresponding command as input and executes
-it's execute method when it is pressed.
+*この例は何をするか？
+2つのアイテムを含むメニューがある。各アイテムはファイル名を受け入れ、1つはファイルを非表示にし、
+もう1つはファイルを削除する。どちらのアイテムにも元に戻すオプションがある。
+各項目は、対応するコマンドを入力として受け取り、押されたときにそのexecuteメソッドを
+実行するMenuItemクラスである。
 
-*TL;DR
-Object oriented implementation of callback functions.
+*要約
+コールバック関数のオブジェクト指向の実装
 
-*Examples in Python ecosystem:
-Django HttpRequest (without execute method):
+*Pythonのエコシステムの例:
+Django HttpRequest (実行メソッドなし):
 https://docs.djangoproject.com/en/2.1/ref/request-response/#httprequest-objects
 """
 
@@ -25,11 +23,11 @@ from typing import List, Union
 
 class HideFileCommand:
     """
-    A command to hide a file given its name
+    与えられた名前のファイルを非表示にするコマンド
     """
 
     def __init__(self) -> None:
-        # an array of files hidden, to undo them as needed
+        # 非表示のファイルのリスト、必要に応じて元に戻す
         self._hidden_files: List[str] = []
 
     def execute(self, filename: str) -> None:
@@ -43,11 +41,11 @@ class HideFileCommand:
 
 class DeleteFileCommand:
     """
-    A command to delete a file given its name
+    与えられた名前のファイルを削除するコマンド
     """
 
     def __init__(self) -> None:
-        # an array of deleted files, to undo them as needed
+        # 削除されたファイルのリスト、必要に応じて元に戻す
         self._deleted_files: List[str] = []
 
     def execute(self, filename: str) -> None:
@@ -61,7 +59,7 @@ class DeleteFileCommand:
 
 class MenuItem:
     """
-    The invoker class. Here it is items in a menu.
+    呼び出し側クラス。メニューの項目
     """
 
     def __init__(self, command: Union[HideFileCommand, DeleteFileCommand]) -> None:
@@ -80,22 +78,22 @@ def main():
 
     >>> item2 = MenuItem(HideFileCommand())
 
-    # create a file named `test-file` to work with
+    # 使用する`test-file`という名前のファイルを作成
     >>> test_file_name = 'test-file'
 
-    # deleting `test-file`
+    # `test-file`を削除
     >>> item1.on_do_press(test_file_name)
     deleting test-file
 
-    # restoring `test-file`
+    # `test-file`を復元
     >>> item1.on_undo_press()
     restoring test-file
 
-    # hiding `test-file`
+    # `test-file`を非表示
     >>> item2.on_do_press(test_file_name)
     hiding test-file
 
-    # un-hiding `test-file`
+    # `test-file`を表示
     >>> item2.on_undo_press()
     un-hiding test-file
     """

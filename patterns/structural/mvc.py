@@ -1,6 +1,6 @@
 """
-*TL;DR
-Separates data in GUIs from the ways it is presented, and accepted.
+*要約
+GUIのデータを、表示および受け入れる方法から分離する。
 """
 
 from abc import ABC, abstractmethod
@@ -13,8 +13,10 @@ class Model(ABC):
 
     @abstractmethod
     def get(self, item):
-        """Returns an object with a .items() call method
-        that iterates over key,value pairs of its information."""
+        """
+        情報のキーと値のペアを反復処理する.items()呼び出しメソッドを
+        持つオブジェクトを返す
+        """
         pass
 
     @property
@@ -25,8 +27,7 @@ class Model(ABC):
 
 class ProductModel(Model):
     class Price(float):
-        """A polymorphic way to pass a float with a particular
-        __str__ functionality."""
+        """特別な__str__機能を備えたフロートを渡すポリモーフィックな方法"""
 
         def __str__(self):
             return f"{self:.2f}"
@@ -56,8 +57,10 @@ class View(ABC):
 
     @abstractmethod
     def show_item_information(self, item_type, item_name, item_info):
-        """Will look for item information by iterating over key,value pairs
-        yielded by item_info.items()"""
+        """
+        item_info.items()によって生成されたキーと値のペアを反復処理することにより、
+        アイテム情報を検索する
+        """
         pass
 
     @abstractmethod
@@ -100,8 +103,8 @@ class Controller:
 
     def show_item_information(self, item_name):
         """
-        Show information about a {item_type} item.
-        :param str item_name: the name of the {item_type} item to show information about
+        {item_type}アイテムに関する情報を表示する。
+        :param str item_name: 情報を表示するための{item_type}アイテムの名前
         """
         try:
             item_info = self.model.get(item_name)

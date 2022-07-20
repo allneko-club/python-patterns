@@ -1,11 +1,10 @@
 """
-An example of the Template pattern in Python
+Pythonによるテンプレートパターンの例
 
-*TL;DR
-Defines the skeleton of a base algorithm, deferring definition of exact
-steps to subclasses.
+*要約
+基本アルゴリズムのスケルトンを定義し、正確なステップの定義をサブクラスに委ねます。
 
-*Examples in Python ecosystem:
+*Pythonのエコシステムの例:
 Django class based views: https://docs.djangoproject.com/en/2.1/topics/class-based-views/
 """
 

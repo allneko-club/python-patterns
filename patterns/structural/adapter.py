@@ -1,31 +1,28 @@
 """
-*What is this pattern about?
-The Adapter pattern provides a different interface for a class. We can
-think about it as a cable adapter that allows you to charge a phone
-somewhere that has outlets in a different shape. Following this idea,
-the Adapter pattern is useful to integrate classes that couldn't be
-integrated due to their incompatible interfaces.
+*このデザインパターンについて
+アダプターパターンは、クラスに異なるインターフェイスを提供する。
+コンセントの形が違うところに携帯電話を充電できるケーブルのアダプターと考えることができる。
+この考えに従うと、アダプタパターンは、互換性のないインターフェイスにより統合できない
+クラスを統合するのに役立つ。
 
-*What does this example do?
+*この例は何をするか？
+この例には、さまざまなノイズを発生させる物や動物（Dog、Cat、Human、Car）を表す
+クラスがある。Adapterクラスは、このようなノイズを発生させるオリジナルの
+メソッドとは異なるインターフェイスを提供する。そのため、オリジナルのインターフェース
+（barkやmeowなど）は別の名前（make_noise）で利用できる。
 
-The example has classes that represent entities (Dog, Cat, Human, Car)
-that make different noises. The Adapter class provides a different
-interface to the original methods that make such noises. So the
-original interfaces (e.g., bark and meow) are available under a
-different name: make_noise.
-
-*Where is the pattern used practically?
-The Grok framework uses adapters to make objects work with a
-particular API without modifying the objects themselves:
+*このパターンは実際にどこで使われているか？
+Grokフレームワークは、アダプターを使用して、オブジェクト自体を変更せずに、
+オブジェクトを特定のAPIで動作させる:
 http://grok.zope.org/doc/current/grok_overview.html#adapters
 
-*References:
+*参照:
 http://ginstrom.com/scribbles/2008/11/06/generic-adapter-class-in-python/
 https://sourcemaking.com/design_patterns/adapter
 http://python-3-patterns-idioms-test.readthedocs.io/en/latest/ChangeInterface.html#adapter
 
-*TL;DR
-Allows the interface of an existing class to be used as another interface.
+*要約
+既存のクラスのインターフェースを別のインターフェースとして使用できるようにする。
 """
 
 from typing import Callable, TypeVar
@@ -66,25 +63,25 @@ class Car:
 
 
 class Adapter:
-    """Adapts an object by replacing methods.
+    """メソッドを置き換えることによってオブジェクトを適応させる
 
-    Usage
+    使い方
     ------
     dog = Dog()
     dog = Adapter(dog, make_noise=dog.bark)
     """
 
     def __init__(self, obj: T, **adapted_methods: Callable):
-        """We set the adapted methods in the object's dict."""
+        """オブジェクトのdictにadapted_methodsを設定"""
         self.obj = obj
         self.__dict__.update(adapted_methods)
 
     def __getattr__(self, attr):
-        """All non-adapted calls are passed to the object."""
+        """適応されていない呼び出しはすべてオブジェクトに渡す"""
         return getattr(self.obj, attr)
 
     def original_dict(self):
-        """Print original object dict."""
+        """オリジナルのオブジェクトの辞書をプリントする"""
         return self.obj.__dict__
 
 

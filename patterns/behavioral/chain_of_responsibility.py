@@ -1,21 +1,19 @@
 """
-*What is this pattern about?
+*このデザインパターンについて
 
-The Chain of responsibility is an object oriented version of the
-`if ... elif ... elif ... else ...` idiom, with the
-benefit that the condition–action blocks can be dynamically rearranged
-and reconfigured at runtime.
+Chain of responsibilityは、`if ... elif ... elif ... else ...`文法の
+オブジェクト指向バージョンです。条件アクションブロックを実行時に動的に再配置および
+再構成できるという利点がある。
 
-This pattern aims to decouple the senders of a request from its
-receivers by allowing request to move through chained
-receivers until it is handled.
+このパターンは、リクエストが処理されるまでチェーンされたレシーバーを通過できるようにすることで、
+リクエストの送信者をレシーバーから切り離すことが目的である。
 
-Request receiver in simple form keeps a reference to a single successor.
-As a variation some receivers may be capable of sending requests out
-in several directions, forming a `tree of responsibility`.
+単純な形式のリクエストレシーバーは、単一の後継オブジェクトへの参照を保持する。
+バリエーションとして、一部の受信者は「責任のツリー」を形成して、いくつかの方向に
+要求を送信できる場合がある。
 
-*TL;DR
-Allow a request to pass down a chain of receivers until it is handled.
+*要約
+リクエストが処理されるまで、レシーバーのチェーンにリクエストを渡せるようにできる。
 """
 
 from abc import ABC, abstractmethod
@@ -28,11 +26,10 @@ class Handler(ABC):
 
     def handle(self, request: int) -> None:
         """
-        Handle request and stop.
-        If can't - call next handler in chain.
+        リクエストを処理して停止する。
+        できない場合 - チェーン内の次のハンドラーを呼ぶ
 
-        As an alternative you might even in case of success
-        call the next handler.
+        別の方法として、成功した場合でも次のハンドラーを呼び出すことができる
         """
         res = self.check_range(request)
         if not res and self.successor:
@@ -40,12 +37,12 @@ class Handler(ABC):
 
     @abstractmethod
     def check_range(self, request: int) -> Optional[bool]:
-        """Compare passed value to predefined interval"""
+        """渡された値を事前定義された間隔と比較する"""
 
 
 class ConcreteHandler0(Handler):
-    """Each handler can be different.
-    Be simple and static...
+    """各ハンドラーは異なる場合がある
+    シンプルで静的なハンドラー
     """
 
     @staticmethod
@@ -57,7 +54,7 @@ class ConcreteHandler0(Handler):
 
 
 class ConcreteHandler1(Handler):
-    """... With it's own internal state"""
+    """クラスの内部状態を使うハンドラー"""
 
     start, end = 10, 20
 
@@ -69,7 +66,7 @@ class ConcreteHandler1(Handler):
 
 
 class ConcreteHandler2(Handler):
-    """... With helper methods."""
+    """ヘルパーメソッドを使ったハンドラー"""
 
     def check_range(self, request: int) -> Optional[bool]:
         start, end = self.get_interval_from_db()

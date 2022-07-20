@@ -1,10 +1,9 @@
 """
-@author: Eugene Duboviy <eugene.dubovoy@gmail.com> | github.com/duboviy
+@著者: Eugene Duboviy <eugene.dubovoy@gmail.com> | github.com/duboviy
 
-In Blackboard pattern several specialised sub-systems (knowledge sources)
-assemble their knowledge to build a possibly partial or approximate solution.
-In this way, the sub-systems work together to solve the problem,
-where the solution is the sum of its parts.
+ブラックボードパターンでは、いくつかの特殊なサブシステム（知識源）が知識を集めて、
+部分的または近似的なソリューションを構築する。
+このように、サブシステムが連携して問題を解決する。解決策はそのパーツの合計である。
 
 https://en.wikipedia.org/wiki/Blackboard_system
 """
@@ -20,7 +19,7 @@ class Blackboard:
             "problems": 0,
             "suggestions": 0,
             "contributions": [],
-            "progress": 0,  # percentage, if 100 -> task is finished
+            "progress": 0,  # パーセンテージ, 100ならタスク完了
         }
 
     def add_expert(self, expert):
@@ -33,8 +32,8 @@ class Controller:
 
     def run_loop(self):
         """
-        This function is a loop that runs until the progress reaches 100.
-        It checks if an expert is eager to contribute and then calls its contribute method.
+        この関数は、progressが100に達するまで実行されるループ。
+        エキスパートが貢献したいかどうかをチェックしてから、そのcontributeメソッドを呼び出す。
         """
         while self.blackboard.common_state["progress"] < 100:
             for expert in self.blackboard.experts:
@@ -124,7 +123,7 @@ def main():
 
 
 if __name__ == "__main__":
-    random.seed(1234)  # for deterministic doctest outputs
+    random.seed(1234)  # doctestの出力に再現性を持たせるためにシード値を設定する
     import doctest
 
     doctest.testmod()

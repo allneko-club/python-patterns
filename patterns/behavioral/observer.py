@@ -1,10 +1,10 @@
 """
 http://code.activestate.com/recipes/131499-observer-pattern/
 
-*TL;DR
-Maintains a list of dependents and notifies them of any state changes.
+*要約
+依存しているオブジェクトのリストを保持し、状態の変化を通知する。
 
-*Examples in Python ecosystem:
+*Pythonのエコシステムの例:
 Django Signals: https://docs.djangoproject.com/en/3.1/topics/signals/
 Flask Signals: https://flask.palletsprojects.com/en/1.1.x/signals/
 """
@@ -15,7 +15,7 @@ from contextlib import suppress
 from typing import Protocol
 
 
-# define a generic observer type
+# 一般的なオブザーバータイプを定義する
 class Observer(Protocol):
     def update(self, subject: Subject) -> None:
         pass
@@ -92,7 +92,7 @@ def main():
     HexViewer: Subject Data 2 has data 0x5
     DecimalViewer: Subject Data 2 has data 5
 
-    # Detach HexViewer from data1 and data2
+    # data1とdata2からHexViewerを切り離します
     >>> data1.detach(view2)
     >>> data2.detach(view2)
 

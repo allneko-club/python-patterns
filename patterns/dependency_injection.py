@@ -1,15 +1,14 @@
 """
-Dependency Injection (DI) is a technique whereby one object supplies the dependencies (services)
-to another object (client).
-It allows to decouple objects: no need to change client code simply because an object it depends on
-needs to be changed to a different one. (Open/Closed principle)
+依存性注入（DI）は、あるオブジェクトが別のオブジェクト（クライアント）に依存性（サービス）を提供する手法。
+これによりオブジェクトを分離できる: 依存するオブジェクトを別のオブジェクトに変更する必要があるという
+理由だけで、クライアントコードを変更する必要はない。（オープンクローズドの原則）
 
-Port of the Java example of Dependency Injection" in
-"xUnit Test Patterns - Refactoring Test Code" by Gerard Meszaros
+依存性注入のJavaの例の一部
+"xUnit Test Patterns - Refactoring Test Code" 著: Gerard Meszaros
 (ISBN-10: 0131495054, ISBN-13: 978-0131495050)
 
-In the following example `time_provider` (service) is embedded into TimeDisplay (client).
-If such service performed an expensive operation you would like to substitute or mock it in tests.
+次の例では、`time_provider`（サービス）がTimeDisplay（クライアント）に埋め込まれている。
+そのようなサービスが高価な操作を実行した場合は、テストでそれを代用またはモックしたいと思うだろう。
 
 class TimeDisplay(object):
 
@@ -52,7 +51,7 @@ class ParameterInjection:
 
 
 class SetterInjection:
-    """Setter Injection"""
+    """セッターインジェクション"""
 
     def __init__(self):
         pass
@@ -70,8 +69,7 @@ class SetterInjection:
 
 def production_code_time_provider() -> str:
     """
-    Production code version of the time provider (just a wrapper for formatting
-    datetime for this example).
+    タイムプロバイダーの製品コードバージョン（この例では日時をフォーマットするための単なるラッパーである）
     """
     current_time = datetime.datetime.now()
     current_time_formatted = f"{current_time.hour}:{current_time.minute}"
@@ -79,7 +77,7 @@ def production_code_time_provider() -> str:
 
 
 def midnight_time_provider() -> str:
-    """Hard-coded stub"""
+    """ハードコードされたスタブ"""
     return "24:01"
 
 

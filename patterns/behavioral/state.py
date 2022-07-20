@@ -1,20 +1,20 @@
 """
-Implementation of the state pattern
+ステートパターンの実装
 
 http://ginstrom.com/scribbles/2007/10/08/design-patterns-python-style/
 
-*TL;DR
-Implements state as a derived class of the state pattern interface.
-Implements state transitions by invoking methods from the pattern's superclass.
+*要約
+ステートパターンインターフェイスの派生クラスとしてステートを実装する。
+パターンのスーパークラスからメソッドを呼び出すことにより、状態遷移を実装する。
 """
 
 
 class State:
 
-    """Base state. This is to share functionality"""
+    """基本状態。これは機能を共有するためのクラス"""
 
     def scan(self):
-        """Scan the dial to the next station"""
+        """次のステーションへのダイヤルをスキャンする"""
         self.pos += 1
         if self.pos == len(self.stations):
             self.pos = 0
@@ -47,10 +47,10 @@ class FmState(State):
 
 class Radio:
 
-    """A radio.     It has a scan button, and an AM/FM toggle switch."""
+    """ラジオ。スキャンボタンとAM/FMトグルスイッチがある"""
 
     def __init__(self):
-        """We have an AM state and an FM state"""
+        """AM状態とFM状態がある"""
         self.amstate = AmState(self)
         self.fmstate = FmState(self)
         self.state = self.amstate

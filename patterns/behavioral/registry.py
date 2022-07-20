@@ -8,8 +8,7 @@ class RegistryHolder(type):
     def __new__(cls, name, bases, attrs):
         new_cls = type.__new__(cls, name, bases, attrs)
         """
-            Here the name of the class is used as key but it could be any class
-            parameter.
+        ここでは、クラスの名前がキーとして使用されていますが、任意のクラスパラメータにできる。
         """
         cls.REGISTRY[new_cls.__name__] = new_cls
         return new_cls
@@ -21,15 +20,14 @@ class RegistryHolder(type):
 
 class BaseRegisteredClass(metaclass=RegistryHolder):
     """
-    Any class that will inherits from BaseRegisteredClass will be included
-    inside the dict RegistryHolder.REGISTRY, the key being the name of the
-    class and the associated value, the class itself.
+    BaseRegisteredClassから継承するクラスはすべて、dictRegistryHolder.REGISTRY
+    辞書内に含まれます。そのキーはクラスの名前、値はクラス自体である。
     """
 
 
 def main():
     """
-    Before subclassing
+    サブクラス化する前
     >>> sorted(RegistryHolder.REGISTRY)
     ['BaseRegisteredClass']
 
@@ -37,7 +35,7 @@ def main():
     ...    def __init__(self, *args, **kwargs):
     ...        pass
 
-    After subclassing
+    サブクラス化した後
     >>> sorted(RegistryHolder.REGISTRY)
     ['BaseRegisteredClass', 'ClassRegistree']
     """

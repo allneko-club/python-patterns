@@ -1,38 +1,34 @@
 """
-Example from https://en.wikipedia.org/wiki/Facade_pattern#Python
+例の出所 https://en.wikipedia.org/wiki/Facade_pattern#Python
 
+*このデザインパターンについて
+ファサードパターンは、複雑なシステムへのより単純な統合インターフェイスを提供する方法。
+単一のエントリポイントを提供することにより、基盤となるシステムの機能にアクセスするための
+簡単な方法を提供する。この種の抽象化は、実生活で多く見られる。たとえば、ボタンを
+押すだけでコンピュータの電源を入れることができるが、実際には、ボタンを押したときに
+実行される多くの手順や操作がある（例: ディスクからメモリへのプログラムのロード）
+この場合、ボタンは、コンピューターの電源を入れるためのすべての基本的な手順への
+統一されたインターフェイスとして機能する。
 
-*What is this pattern about?
-The Facade pattern is a way to provide a simpler unified interface to
-a more complex system. It provides an easier way to access functions
-of the underlying system by providing a single entry point.
-This kind of abstraction is seen in many real life situations. For
-example, we can turn on a computer by just pressing a button, but in
-fact there are many procedures and operations done when that happens
-(e.g., loading programs from disk to memory). In this case, the button
-serves as an unified interface to all the underlying procedures to
-turn on a computer.
+*このパターンは実際にどこで使われているか？
+このパターンは、isdir関数を使用する時にPython標準ライブラリで確認できる。
+ユーザーはこの関数を使用してパスがディレクトリを参照しているかどうかを知るだけだが、
+システムはいくつかの操作を行い、他のモジュール（例: os.stat）を呼び出して結果を出す。
 
-*Where is the pattern used practically?
-This pattern can be seen in the Python standard library when we use
-the isdir function. Although a user simply uses this function to know
-whether a path refers to a directory, the system makes a few
-operations and calls other modules (e.g., os.stat) to give the result.
-
-*References:
+*参照:
 https://sourcemaking.com/design_patterns/facade
 https://fkromer.github.io/python-pattern-references/design/#facade
 http://python-3-patterns-idioms-test.readthedocs.io/en/latest/ChangeInterface.html#facade
 
-*TL;DR
-Provides a simpler unified interface to a complex system.
+*要約
+複雑なシステムへのよりシンプルな統合インターフェースを提供する。
 """
 
 
-# Complex computer parts
+# 複雑なコンピューター部品
 class CPU:
     """
-    Simple CPU representation.
+    シンプルなCPUを表す
     """
 
     def freeze(self):
@@ -47,7 +43,7 @@ class CPU:
 
 class Memory:
     """
-    Simple memory representation.
+    シンプルなメモリを表す
     """
 
     def load(self, position, data):
@@ -56,7 +52,7 @@ class Memory:
 
 class SolidStateDrive:
     """
-    Simple solid state drive representation.
+    シンプルなSSDを表す
     """
 
     def read(self, lba, size):
@@ -65,7 +61,7 @@ class SolidStateDrive:
 
 class ComputerFacade:
     """
-    Represents a facade for various computer parts.
+    さまざまなコンピューター部品のファサードを表す
     """
 
     def __init__(self):

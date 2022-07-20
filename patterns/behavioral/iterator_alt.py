@@ -1,14 +1,14 @@
 """
-Implementation of the iterator pattern using the iterator protocol from Python
+Pythonのイテレータプロトコルを使用したイテレータパターンの実装
 
-*TL;DR
-Traverses a container and accesses the container's elements.
+*要約
+コンテナを横断し、コンテナの要素にアクセスする。
 """
 from __future__ import annotations
 
 
 class NumberWords:
-    """Counts by word numbers, up to a maximum of five"""
+    """最大5つまで、単語番号でカウント"""
 
     _WORD_MAP = (
         "one",
@@ -22,10 +22,10 @@ class NumberWords:
         self.start = start
         self.stop = stop
 
-    def __iter__(self) -> NumberWords:  # this makes the class an Iterable
+    def __iter__(self) -> NumberWords:  # このメソッドにより、クラスは反復可能になる
         return self
 
-    def __next__(self) -> str:  # this makes the class an Iterator
+    def __next__(self) -> str:  # このメソッドにより、クラスはイテレータになる
         if self.start > self.stop or self.start > len(self._WORD_MAP):
             raise StopIteration
         current = self.start
@@ -33,18 +33,18 @@ class NumberWords:
         return self._WORD_MAP[current - 1]
 
 
-# Test the iterator
+# イテレーターをテストする
 
 
 def main():
     """
-    # Counting to two...
+    # 2つ数える...
     >>> for number in NumberWords(start=1, stop=2):
     ...     print(number)
     one
     two
 
-    # Counting to five...
+    # 5つ数える...
     >>> for number in NumberWords(start=1, stop=5):
     ...     print(number)
     one

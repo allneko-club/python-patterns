@@ -1,31 +1,28 @@
 """
-*What is this pattern about?
-This pattern is used when creating an object is costly (and they are
-created frequently) but only a few are used at a time. With a Pool we
-can manage those instances we have as of now by caching them. Now it
-is possible to skip the costly creation of an object if one is
-available in the pool.
-A pool allows to 'check out' an inactive object and then to return it.
-If none are available the pool creates one to provide without wait.
+*このデザインパターンについて
+このパターンは、オブジェクトの作成にコストがかかる場合に使用される
+（そしてそれらは頻繁に作成される）ただし、一度に使用されるオブジェクトはごくわずか。
+プールを使用すると、現在のインスタンスをキャッシュすることで管理できる。
+プールでオブジェクトが使用可能な場合、コストのかかるオブジェクトの作成をスキップできる。
+プールを使用すると、非アクティブなオブジェクトを「チェックアウト」してから返すことができる。
+利用可能なものがない場合、プールは待機せずに提供するものを作成する。
 
-*What does this example do?
-In this example queue.Queue is used to create the pool (wrapped in a
-custom ObjectPool object to use with the with statement), and it is
-populated with strings.
-As we can see, the first string object put in "yam" is USED by the
-with statement. But because it is released back into the pool
-afterwards it is reused by the explicit call to sample_queue.get().
-Same thing happens with "sam", when the ObjectPool created inside the
-function is deleted (by the GC) and the object is returned.
+*この例は何をするか？
+この例では、queue.Queueを使ってプール（withステートメントで
+カスタムObjectPoolオブジェクトにラップされている）を作成し、文字列が投入される。
+例のとおり、最初の文字列オブジェクト"yam"は、withステートメントによって使用される。
+ただし、後でプールに解放されるため、sample_queue.get()の明示的な呼び出しにより再利用される。
+関数内で作成されたObjectPoolが（GCによって）削除されオブジェクトが返される時は、
+"sam"でも同じことが起こる。
 
-*Where is the pattern used practically?
+*このパターンは実際にどこで使われているか？
 
-*References:
+*参照:
 http://stackoverflow.com/questions/1514120/python-implementation-of-the-object-pool-design-pattern
 https://sourcemaking.com/design_patterns/object_pool
 
-*TL;DR
-Stores a set of initialized objects kept ready to use.
+*要約
+すぐに使用できる状態の初期化されたオブジェクトのセットを格納する。
 """
 
 
@@ -56,24 +53,24 @@ def main():
 
     >>> def test_object(queue):
     ...    pool = ObjectPool(queue, True)
-    ...    print('Inside func: {}'.format(pool.item))
+    ...    print('関数の内側: {}'.format(pool.item))
 
     >>> sample_queue = queue.Queue()
 
     >>> sample_queue.put('yam')
     >>> with ObjectPool(sample_queue) as obj:
-    ...    print('Inside with: {}'.format(obj))
-    Inside with: yam
+    ...    print('with文の内側: {}'.format(obj))
+    with文の内側: yam
 
-    >>> print('Outside with: {}'.format(sample_queue.get()))
-    Outside with: yam
+    >>> print('with文の外側: {}'.format(sample_queue.get()))
+    with文の外側: yam
 
     >>> sample_queue.put('sam')
     >>> test_object(sample_queue)
-    Inside func: sam
+    関数の内側: sam
 
-    >>> print('Outside func: {}'.format(sample_queue.get()))
-    Outside func: sam
+    >>> print('関数の外側: {}'.format(sample_queue.get()))
+    関数の外側: sam
 
     if not sample_queue.empty():
         print(sample_queue.get())

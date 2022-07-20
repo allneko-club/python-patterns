@@ -1,25 +1,25 @@
 """
 https://www.djangospin.com/design-patterns-python/mediator/
 
-Objects in a system communicate through a Mediator instead of directly with each other.
-This reduces the dependencies between communicating objects, thereby reducing coupling.
+システム内のオブジェクトは、相互に直接通信するのではなくメディエーターを介して通信する。
+これにより、通信するオブジェクト間の依存関係が減少し、それによって結合が減少する。
 
-*TL;DR
-Encapsulates how a set of objects interact.
+*要約
+オブジェクトのセットがどのように相互作用するかをカプセル化する。
 """
 
 from __future__ import annotations
 
 
 class ChatRoom:
-    """Mediator class"""
+    """メディエータークラス"""
 
     def display_message(self, user: User, message: str) -> None:
         print(f"[{user} says]: {message}")
 
 
 class User:
-    """A class whose instances want to interact with each other"""
+    """インスタンスが相互作用したいクラス"""
 
     def __init__(self, name: str) -> None:
         self.name = name

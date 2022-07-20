@@ -1,10 +1,10 @@
 class GraphSearch:
 
-    """Graph search emulation in python, from source
+    """Pythonでのグラフ検索エミュレーション
     http://www.python.org/doc/essays/graphs/
 
-    dfs stands for Depth First Search
-    bfs stands for Breadth First Search"""
+    dfsはDepth First Searchの略
+    bfsはBreadth First Searchの略"""
 
     def __init__(self, graph):
         self.graph = graph
@@ -50,18 +50,17 @@ class GraphSearch:
 
     def find_shortest_path_bfs(self, start, end):
         """
-        Finds the shortest path between two nodes in a graph using breadth-first search.
+        幅優先探索を使用して、グラフ内の2つのノード間の最短経路を検索する。
 
-        :param start: The node to start from.
-        :type start: str or int
-        :param end: The node to find the shortest path to.
-            :type end: str or int
+        :param start: 開始ノード
+        :type start: str または int
+        :param end: 最短経路を見つけるノード
+        :type end: str または int
 
-            :returns queue_path_to_end, dist_to[end]: A list of nodes
-        representing the shortest path from `start` to `end`, and a dictionary
-        mapping each node in the graph (except for `start`) with its distance from it
-        (in terms of hops). If no such path exists, returns an empty list and an empty
-        dictionary instead.
+        :returns queue_path_to_end, dist_to[end]: `start`から`end`までの
+        最短経路を表すノードのリスト、およびグラフ内の各ノード（`start`を除く）
+        とそのノードからの距離（ホップ数）をマッピングする辞書。
+        そのようなパスが存在しない場合は、代わりに空のリストと空の辞書を返す。
         """
         queue = [start]
         dist_to = {start: 0}
@@ -89,7 +88,7 @@ class GraphSearch:
 
 def main():
     """
-    # example of graph usage
+    # グラフの使用例
     >>> graph = {
     ...     'A': ['B', 'C'],
     ...     'B': ['C', 'D'],
@@ -101,21 +100,21 @@ def main():
     ...     'H': ['C']
     ... }
 
-    # initialization of new graph search object
+    # 新しいグラフ検索オブジェクトの初期化
     >>> graph_search = GraphSearch(graph)
 
     >>> print(graph_search.find_path_dfs('A', 'D'))
     ['A', 'B', 'C', 'D']
 
-    # start the search somewhere in the middle
+    # 途中から検索を開始する
     >>> print(graph_search.find_path_dfs('G', 'F'))
     ['G', 'E', 'F']
 
-    # unreachable node
+    # 到達不能ノード
     >>> print(graph_search.find_path_dfs('C', 'H'))
     None
 
-    # non existing node
+    # 存在しないノード
     >>> print(graph_search.find_path_dfs('C', 'X'))
     None
 
@@ -131,15 +130,15 @@ def main():
     >>> print(graph_search.find_shortest_path_bfs('A', 'F'))
     ['A', 'C', 'G', 'E', 'F']
 
-    # start the search somewhere in the middle
+    # 途中から検索を開始する
     >>> print(graph_search.find_shortest_path_bfs('G', 'F'))
     ['G', 'E', 'F']
 
-    # unreachable node
+    # 到達不能ノード
     >>> print(graph_search.find_shortest_path_bfs('A', 'H'))
     None
 
-    # non existing node
+    # 存在しないノード
     >>> print(graph_search.find_shortest_path_bfs('A', 'X'))
     None
     """

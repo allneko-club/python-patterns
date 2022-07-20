@@ -1,25 +1,25 @@
 """
-*References:
+*参照:
 http://en.wikibooks.org/wiki/Computer_Science_Design_Patterns/Bridge_Pattern#Python
 
-*TL;DR
-Decouples an abstraction from its implementation.
+*要約
+抽象化をその実装から切り離す
 """
 
 
-# ConcreteImplementor 1/2
+# 具体的な実装 1/2
 class DrawingAPI1:
     def draw_circle(self, x, y, radius):
         print(f"API1.circle at {x}:{y} radius {radius}")
 
 
-# ConcreteImplementor 2/2
+# 具体的な実装 2/2
 class DrawingAPI2:
     def draw_circle(self, x, y, radius):
         print(f"API2.circle at {x}:{y} radius {radius}")
 
 
-# Refined Abstraction
+# 洗練された抽象化
 class CircleShape:
     def __init__(self, x, y, radius, drawing_api):
         self._x = x
@@ -27,11 +27,11 @@ class CircleShape:
         self._radius = radius
         self._drawing_api = drawing_api
 
-    # low-level i.e. Implementation specific
+    # 低レベル、実装固有
     def draw(self):
         self._drawing_api.draw_circle(self._x, self._y, self._radius)
 
-    # high-level i.e. Abstraction specific
+    # 高レベル、抽象化固有
     def scale(self, pct):
         self._radius *= pct
 

@@ -1,8 +1,8 @@
 """
 http://code.activestate.com/recipes/413838-memento-closure/
 
-*TL;DR
-Provides the ability to restore an object to its previous state.
+*要約
+オブジェクトを以前の状態に復元する機能を提供する。
 """
 
 from typing import Callable, List
@@ -20,9 +20,9 @@ def memento(obj, deep=False):
 
 
 class Transaction:
-    """A transaction guard.
+    """トランザクションガード
 
-    This is, in fact, just syntactic sugar around a memento closure.
+    このクラスは、実際には、クロージャーを利用したmementoメソッドのシンタックスシュガーである
     """
 
     deep = False
@@ -42,9 +42,9 @@ class Transaction:
 
 
 class Transactional:
-    """Adds transactional semantics to methods. Methods decorated  with
-
-    @Transactional will rollback to entry-state upon exceptions.
+    """
+    メソッドにトランザクションセマンティクスを追加する。
+    @Transactionalでデコレートされたメソッドは、例外が発生するとエントリー状態にロールバックする。
     """
 
     def __init__(self, method):
@@ -52,9 +52,8 @@ class Transactional:
 
     def __get__(self, obj, T):
         """
-        A decorator that makes a function transactional.
-
-        :param method: The function to be decorated.
+        関数をトランザクション化するデコレータ
+        :param method: デコレートされた関数
         """
 
         def transaction(*args, **kwargs):
@@ -80,8 +79,8 @@ class NumObj:
 
     @Transactional
     def do_stuff(self):
-        self.value = "1111"  # <- invalid value
-        self.increment()  # <- will fail and rollback
+        self.value = "1111"  # <- 不正値
+        self.increment()  # <- 失敗してロールバック
 
 
 def main():
@@ -101,7 +100,7 @@ def main():
     ...    for i in range(3):
     ...        num_obj.increment()
     ...        print(num_obj)
-    ...    num_obj.value += 'x'  # will fail
+    ...    num_obj.value += 'x'  # 失敗する
     ...    print(num_obj)
     ... except Exception:
     ...    a_transaction.rollback()

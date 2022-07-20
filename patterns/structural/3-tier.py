@@ -1,13 +1,13 @@
 """
-*TL;DR
-Separates presentation, application processing, and data management functions.
+*要約
+プレゼンテーションやアプリケーション処理、データ管理機能を分離する。
 """
 
 from typing import Dict, KeysView, Optional, Union
 
 
 class Data:
-    """Data Store Class"""
+    """データストアクラス"""
 
     products = {
         "milk": {"price": 1.50, "quantity": 10},
@@ -16,13 +16,12 @@ class Data:
     }
 
     def __get__(self, obj, klas):
-
         print("(Fetching from Data Store)")
         return {"products": self.products}
 
 
 class BusinessLogic:
-    """Business logic holding data store instances"""
+    """データストアインスタンスを保持するビジネスロジック"""
 
     data = Data()
 
@@ -36,7 +35,7 @@ class BusinessLogic:
 
 
 class Ui:
-    """UI interaction class"""
+    """UI相互作用クラス"""
 
     def __init__(self) -> None:
         self.business_logic = BusinessLogic()

@@ -1,8 +1,8 @@
 """
-@author: Gordeev Andrey <gordeev.and.and@gmail.com>
+@著者: Gordeev Andrey <gordeev.and.and@gmail.com>
 
-*TL;DR
-Provides a centralized entry point that controls and manages request handling.
+*要約
+要求処理を制御および管理する一元化されたエントリポイントを提供する。
 """
 
 
@@ -23,10 +23,9 @@ class Dispatcher:
 
     def dispatch(self, request):
         """
-        This function is used to dispatch the request based on the type of device.
-        If it is a mobile, then mobile view will be called and if it is a tablet,
-        then tablet view will be called.
-        Otherwise, an error message will be printed saying that cannot dispatch the request.
+        この関数は、デバイスのタイプに基づいてリクエストをディスパッチするために使用される。
+        モバイルの場合はモバイルビューが呼び出され、タブレットの場合はタブレットビューが呼び出される。
+        それ以外は、"Cannot dispatch the request"というエラーメッセージが出力される。
         """
         if request.type == Request.mobile_type:
             self.mobile_view.show_index_page()
@@ -37,14 +36,14 @@ class Dispatcher:
 
 
 class RequestController:
-    """front controller"""
+    """フロントコントローラー"""
 
     def __init__(self):
         self.dispatcher = Dispatcher()
 
     def dispatch_request(self, request):
         """
-        This function takes a request object and sends it to the dispatcher.
+        この関数はリクエストオブジェクトを受け取り、それをディスパッチャに送信する。
         """
         if isinstance(request, Request):
             self.dispatcher.dispatch(request)
@@ -53,7 +52,7 @@ class RequestController:
 
 
 class Request:
-    """request"""
+    """リクエスト"""
 
     mobile_type = "mobile"
     tablet_type = "tablet"

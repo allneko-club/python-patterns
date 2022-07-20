@@ -1,7 +1,7 @@
 """
-Reference:
+参照:
 http://www.slideshare.net/ishraqabd/publish-subscribe-model-overview-13368808
-Author: https://github.com/HanWenfang
+著者: https://github.com/HanWenfang
 """
 
 
@@ -65,8 +65,7 @@ def main():
     >>> vani.subscribe("movie")
     >>> vani.unsubscribe("movie")
 
-    # Note that no one subscribed to `ads`
-    # and that vani changed their mind
+    # 誰も`ads`を購読しておらず、vaniの気が変わったことに注意してください
 
     >>> fftv.publish("cartoon")
     >>> fftv.publish("music")
